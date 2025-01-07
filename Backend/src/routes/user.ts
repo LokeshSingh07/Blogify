@@ -1,7 +1,9 @@
+import { Hono } from 'hono';
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { Hono } from 'hono';
+import { signinInput, signupInput } from '@nextian/blogify-common';
 import { sign } from 'hono/jwt';
+
 
 
 const userRouter = new Hono<{
@@ -23,31 +25,36 @@ userRouter.post('/signup', async(c) => {
     const body = await c.req.json();
 
     // TODO: zod validation naad hashed the password
+    const {success} = signupInput.safeParse(body);
+    if (!success) {
+        c.status(411);
+        return c.json({message: 'Invalid request body'});
+    }
 
     let user;
     try{
         user = await prisma.user.create({
-        data: {
-            email: body.email,
-            password: body.password
-        }
+            data: {
+                email: body.email,
+                password: body.password
+            }
         })
     }
     catch(e){
         c.status(400)
         return c.json({
-        message: 'User already registered',
+            message: 'User already registered',
         })
     }
 
-    const token = await sign({id: user.id}, c.env.JWT_SECRET)
+    const token = await sign({id: user.id}, c.env.JWT_SECRET);
 
     c.status(201);
     return c.json({
-        message: 'User created successfully',
+        message: 'Account created successfully',
         user,
         jwt: token
-    }); 
+    });
 })
 
 
@@ -59,6 +66,11 @@ userRouter.post('/signin', async(c) => {
     }).$extends(withAccelerate());
 
     const {email, password} = await c.req.json();
+    const { success } = signinInput.safeParse({email, password});
+    if (!success) {
+        c.status(411);
+        return c.json({message: 'Invalid request body'});
+    }
 
     let user= await prisma.user.findFirst({
         where: {

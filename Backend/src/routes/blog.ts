@@ -1,7 +1,8 @@
+import { Hono } from 'hono';
 import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
-import { Hono } from 'hono';
-import { sign, verify } from 'hono/jwt';
+import { createBlog, updateBlog } from '@nextian/blogify-common';
+import { verify } from 'hono/jwt';
 
 
 type Bindings = {
@@ -53,6 +54,11 @@ blogRouter.post('/', async(c) => {
     try{
         const userId = c.get("userId");
         const {title, description, coverImage} = await c.req.json();
+        const { success } = createBlog.safeParse({title, description, coverImage});
+        if(!success){
+            c.status(411);
+            return c.json({message: "Invalid request body"})
+        }
     
         // TODO: zod validation
     
@@ -90,6 +96,11 @@ blogRouter.put('/', async(c) => {
         const {id, title, description, coverImage, published} = await c.req.json();
     
         // TODO: zod validation
+        const { success } = updateBlog.safeParse({id, title, description, coverImage, published});
+        if(!success){
+            c.status(411);
+            return c.json({message: "Invalid request body"})
+        }
     
         const blog = await prisma.post.update({
             where: {
@@ -128,7 +139,7 @@ blogRouter.get('/bulk', async(c) => {
 
         c.status(201);
         return c.json({
-            message: "All blog fetched successfully",
+            message: "All blogs fetched successfully",
             blog
         })
     }
