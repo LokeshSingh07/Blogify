@@ -35,8 +35,10 @@ userRouter.post('/signup', async(c) => {
     try{
         user = await prisma.user.create({
             data: {
+                name: body.name,
                 email: body.email,
-                password: body.password
+                password: body.password,
+                profileImage: `https://avatar.iran.liara.run/username?username=${body.name}`
             }
         })
     }
