@@ -16,14 +16,14 @@ export const signinInput = z.object({
 
 // blog Schema
 export const createBlog = z.object({
-    title: z.string().min(3).max(50),
-    description: z.string().min(10).max(500),
+    title: z.string().min(3).max(100),
+    description: z.string().min(100).max(5000),
     coverImage: z.string().optional(),
 })
 export const updateBlog = z.object({
     id: z.string().uuid(),
-    title: z.string().min(3).max(50),
-    description: z.string().min(10).max(500),
+    title: z.string().min(3).max(100),
+    description: z.string().min(100).max(6000),
     coverImage: z.string().url(),
     published: z.boolean().optional()
 })
