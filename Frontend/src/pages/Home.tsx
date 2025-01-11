@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const LandingPage = () => {
+const LandingPage:React.FC = () => {
   const navigate = useNavigate();
 
   return (
