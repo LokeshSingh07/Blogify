@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import { SignupInput } from '@nextian/blogify-common';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
 
 
@@ -14,6 +14,7 @@ function Auth({type}: ParamsType):React.ReactElement {
   // console.log("type: ", type);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const token = localStorage.getItem("token");
 
   const [showPassword, setShowPassword] = React.useState(false);
   const [postInputs, setPostInputs] = useState<SignupInput>({
@@ -37,13 +38,19 @@ function Auth({type}: ParamsType):React.ReactElement {
 
       toast.success(resp.data.message);
     }
-    catch (error: any) {
+    catch (error: AxiosError | any) {
       console.log("error: ", error.response.data);
       toast.error(error.response.data.message);
     }
     setLoading(false);
   }
 
+  // if user already login sent to blogs page
+  useEffect(()=>{
+    if(token){
+      navigate("/blogs");
+    }
+  },[token])
 
   return (
     <div className="w-[90%] sm:w-[50%] flex flex-col items-center justify-center mt-10 md:mt-0">
