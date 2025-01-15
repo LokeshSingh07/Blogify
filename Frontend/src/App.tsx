@@ -7,6 +7,8 @@ import Blog from './pages/Blog';
 import Error from './pages/Error';
 import { Toaster } from 'react-hot-toast';
 import { Blogs } from './pages/Blogs';
+import { MembershipPlan } from './pages/MembershipPlan';
+import { Publish } from './pages/Publish';
 
 
 
@@ -24,6 +26,8 @@ function App() {
           <Route path='/signin' element={<Signin/>}/>
           <Route path='/blogs' element={<Blogs/>}/>
           <Route path='/blog/:id' element={<Blog/>}/>
+          <Route path='/publish' element={<Publish/>}/>
+          <Route path='/membership' element={<MembershipPlan/>}/>
 
           <Route path='*' element={<Error/>}/>
         </Routes>

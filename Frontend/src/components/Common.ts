@@ -25,5 +25,6 @@ export type BlogProps = {
           profileImage?: string;
       };
       topic?: string;
+      premium?: boolean
   };
 }
