@@ -5,7 +5,6 @@ import { BlogCard } from "../components/BlogCard";
 import { FiPlus } from "react-icons/fi";
 import { AppBar } from "../components/AppBar";
 import { Link, useNavigate } from "react-router-dom";
-import { PiStarFourFill } from "react-icons/pi";
 import Loading from "../components/Loading";
 
 const tabs = [

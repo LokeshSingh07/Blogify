@@ -1,6 +1,5 @@
 import React from 'react';
-import { IoIosMore, IoIosRemoveCircleOutline } from 'react-icons/io';
-import { MdOutlineBookmarkAdd } from 'react-icons/md';
+import { IoIosMore } from 'react-icons/io';
 import { BlogProps, formatDateToDayMonthYear } from './Common';
 import { useNavigate } from 'react-router-dom';
 import { CiBookmarkPlus, CiCircleMinus } from 'react-icons/ci';
