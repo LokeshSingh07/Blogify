@@ -129,6 +129,7 @@ blogRouter.put('/', async(c) => {
 
 
 // get all blogs
+// TODO: Add pagination
 blogRouter.get('/bulk', async(c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
@@ -177,9 +178,24 @@ blogRouter.get('/:id', async(c) => {
     
         const blog = await prisma.post.findFirst({
             where: {
-                id: blogId
+                id: blogId,
+                published: true
+            },
+            select: {
+                title: true,
+                description: true,
+                createdAt: true,
+                author: {
+                    select: {
+                        name: true,
+                        profileImage: true,
+                        bio: true
+                    }
+
+                }
             }
         })
+        
         if(!blog){
             c.status(404);
             return c.json({message: "Blog not found"})
@@ -203,6 +219,7 @@ blogRouter.get('/:id', async(c) => {
 
 
 // delete a blog
+// TODO: add validation and checks
 blogRouter.delete('/:id', async(c) => {
     const prisma = new PrismaClient({
         datasourceUrl: c.env.DATABASE_URL
