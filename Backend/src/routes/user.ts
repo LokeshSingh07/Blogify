@@ -74,7 +74,7 @@ userRouter.post('/signin', async(c) => {
         return c.json({message: 'Invalid request body'});
     }
 
-    let user= await prisma.user.findFirst({
+    let user = await prisma.user.findFirst({
         where: {
         email,
         password
