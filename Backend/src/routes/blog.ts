@@ -4,7 +4,6 @@ import { withAccelerate } from '@prisma/extension-accelerate';
 import { createBlog, updateBlog } from '@nextian/blogify-common';
 import { verify } from 'hono/jwt';
 
-
 type Bindings = {
   DATABASE_URL: string,
   JWT_SECRET: string
@@ -53,20 +52,33 @@ blogRouter.post('/', async(c) => {
 
     try{
         const userId = c.get("userId");
-        const {title, description, coverImage} = await c.req.json();
-        const { success } = createBlog.safeParse({title, description, coverImage});
-        if(!success){
+        
+        // parse data
+        const formData=  await c.req.formData();
+        const title = formData.get("title") as string;
+        const description = formData.get("description") as string;
+        const coverImage = formData.get("coverImage") as File | null;
+
+        console.log("coverImage : ", coverImage);
+
+        // const { success } = createBlog.safeParse({title, description, coverImage});
+        if(!title || !description || !coverImage){
             c.status(411);
             return c.json({message: "Invalid request body"})
         }
     
         // TODO: zod validation
-    
+
+        // TODO: Upload file to Cloudinary
+        // const coverImageLink = await uploadToCloudinary(coverImage, c.env);
+
+        const coverImageLink = "https://miro.medium.com/v2/resize:fit:640/format:webp/1*Ps07j5DLW5fXWwknfhKecQ.jpeg";
+
         const blog = await prisma.post.create({
             data: {
                 title,
                 description,
-                coverImage,
+                coverImage: coverImageLink,
                 published: true,
                 authorId: userId
             }
@@ -146,7 +158,7 @@ blogRouter.get('/bulk', async(c) => {
                 }
             }
         });
-        console.log("blog: ", blog);
+        // console.log("blog: ", blog);
 
         c.status(201);
         return c.json({

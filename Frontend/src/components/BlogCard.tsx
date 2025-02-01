@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoIosMore } from 'react-icons/io';
 import { BlogProps, formatDateToDayMonthYear } from './Common';
 import { useNavigate } from 'react-router-dom';
 import { CiBookmarkPlus, CiCircleMinus } from 'react-icons/ci';
+import toast from 'react-hot-toast';
 
 
 
 export const BlogCard:React.FC<BlogProps> = ({blog}) => {
     const navigate = useNavigate();
+    const [showOptions, setShowOptions] = useState(false);
+    const [copySuccess, setCopySuccess] = useState(false);
 
-
+    const share = async()=>{
+        try{
+            await navigator.clipboard.writeText(`${window?.location?.origin}/blog/${blog?.id}` );
+            setCopySuccess(true);
+            toast.success("link copied");
+            setTimeout(()=> setShowOptions(false), 100);
+        }
+        catch(err){
+            console.error("Failed to share:", err);
+        }
+    }
+ 
   return (
     <div className="w-full flex flex-row gap-10">
         {/* content*/}
@@ -36,10 +50,26 @@ export const BlogCard:React.FC<BlogProps> = ({blog}) => {
                     <div className='bg-slate-200 px-2 rounded-full text-sm'>{blog?.topic || "demo"}</div>
                     <div className='text-sm'>{Math.ceil(blog?.description?.length/200)} min read</div>
                 </div>
-                <div className={`flex items-center justify-center gap-5`}>
+                <div className={`relative flex items-center justify-center gap-5`}>
                     <button className='text-gray-500'><CiBookmarkPlus fontSize={22}/></button>
                     <button className='text-gray-500'><CiCircleMinus fontSize={22}/></button>
-                    <button className='text-gray-500'><IoIosMore fontSize={22}/></button>
+                    <button className='text-gray-500' onClick={()=> {setShowOptions(!showOptions)}} ><IoIosMore fontSize={22}/></button>
+                    {/* More options (Edit and delete) */}
+                    {
+                        showOptions && (
+                            <div className="absolute left-[110px] mt-[100px] w-36 bg-white border rounded-md shadow-md">
+                                <button className="w-full text-left px-3 py-1 hover:bg-gray-100" onClick={() => console.log("follow clicked")}>
+                                    Follow author
+                                </button>
+                                <button className="w-full text-left px-3 py-1 text-green-500 hover:bg-gray-100" onClick={() => share()}>
+                                    share
+                                </button>
+                                <button className="w-full text-left px-3 py-1 text-red-500 hover:bg-gray-100" onClick={() => console.log("Delete clicked")}>
+                                    Report
+                                </button>
+                            </div>
+                        )
+                    }
                 </div>
             </div>
         </div>

@@ -36,11 +36,12 @@ userRouter.post('/signup', async(c) => {
         user = await prisma.user.create({
             data: {
                 name: body.name,
-                email: body.email,
+                email: body.email.toLowerCase(),
                 password: body.password,
                 profileImage: `https://avatar.iran.liara.run/username?username=${body.name}`
             }
         })
+        console.log("user data : ", user);
     }
     catch(e){
         c.status(400)
@@ -63,38 +64,44 @@ userRouter.post('/signup', async(c) => {
 
 // signin
 userRouter.post('/signin', async(c) => {
-    const prisma = new PrismaClient({
-        datasourceUrl: c.env.DATABASE_URL
-    }).$extends(withAccelerate());
+    try{
+        const prisma = new PrismaClient({
+            datasourceUrl: c.env.DATABASE_URL
+        }).$extends(withAccelerate());
 
-    const {email, password} = await c.req.json();
-    const { success } = signinInput.safeParse({email, password});
-    if (!success) {
-        c.status(411);
-        return c.json({message: 'Invalid request body'});
-    }
-
-    let user = await prisma.user.findFirst({
-        where: {
-        email,
-        password
+        const {email, password} = await c.req.json();
+        const { success } = signinInput.safeParse({email, password});
+        if (!success) {
+            c.status(411);
+            return c.json({message: 'Invalid request body'});
         }
-    })
 
-    if(!user){
+        let user = await prisma.user.findFirst({
+            where: {
+                email: email.toLowerCase(),
+                password
+            }
+        })
+        
+        if(!user){
+            c.status(403) // unauthorized
+            return c.json({ message: 'Invalid credentials'})
+        }
+        
+        const token = await sign({id: user?.id}, c.env.JWT_SECRET)
+        c.status(200);
+            return c.json({
+            message: 'User logged in successfully',
+            user,
+            jwt: token
+        });
+    }
+    catch(err){
         c.status(403) // unauthorized
         return c.json({
-        message: 'Invalid credentials',
+            message: 'Internal server error',
         })
     }
-
-    const token = await sign({id: user.id}, c.env.JWT_SECRET)
-    c.status(200);
-        return c.json({
-        message: 'User logged in successfully',
-        user,
-        jwt: token
-    });
 })
 
 

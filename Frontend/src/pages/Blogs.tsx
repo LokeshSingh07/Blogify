@@ -38,7 +38,7 @@ export const Blogs:React.FC = ()=>{
             console.log("Response: ", response.status, response.data);
             
             setBlogs(response.data.blog);
-            toast.success(response.data.message);
+            // toast.success(response.data.message);
 
         }
         catch(err:any){
