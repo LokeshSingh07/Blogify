@@ -10,12 +10,10 @@ import toast from 'react-hot-toast';
 export const BlogCard:React.FC<BlogProps> = ({blog}) => {
     const navigate = useNavigate();
     const [showOptions, setShowOptions] = useState(false);
-    const [copySuccess, setCopySuccess] = useState(false);
 
     const share = async()=>{
         try{
-            await navigator.clipboard.writeText(`${window?.location?.origin}/blog/${blog?.id}` );
-            setCopySuccess(true);
+            await navigator.clipboard.writeText(`${window?.location?.origin}/blog/${blog?.id}`);
             toast.success("link copied");
             setTimeout(()=> setShowOptions(false), 100);
         }
