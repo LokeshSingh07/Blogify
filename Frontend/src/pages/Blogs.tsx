@@ -5,7 +5,7 @@ import { BlogCard } from "../components/BlogCard";
 import { FiPlus } from "react-icons/fi";
 import { AppBar } from "../components/AppBar";
 import { Link, useNavigate } from "react-router-dom";
-import Loading from "../components/Loading";
+
 
 const tabs = [
     {
@@ -41,7 +41,7 @@ export const Blogs:React.FC = ()=>{
     const token = localStorage.getItem("token"); 
     const [loading, setLoading]  = useState<boolean>(false);
     const [page, setPage] = useState<number>(1);
-    const [limit, setLimit] = useState<number>(10);
+    const limit = 10;
     const [hasMore, setHasMore] = useState<boolean>(true); 
     const navigate= useNavigate();
 
