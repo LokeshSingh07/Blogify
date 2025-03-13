@@ -3,10 +3,13 @@ import { PrismaClient } from '@prisma/client/edge';
 import { withAccelerate } from '@prisma/extension-accelerate';
 import { createBlog, updateBlog } from '@nextian/blogify-common';
 import { verify } from 'hono/jwt';
+import { uploadToCloudinary } from '../utils/cloudinary';
 
 type Bindings = {
   DATABASE_URL: string,
-  JWT_SECRET: string
+  JWT_SECRET: string,
+  CLOUDINARY_CLOUD_NAME: string,
+  CLOUDINARY_UPLOAD_PRESET: string
 }
 //  pass data from middleware to the route handle
 type Variables = {
@@ -70,9 +73,7 @@ blogRouter.post('/', async(c) => {
         // TODO: zod validation
 
         // TODO: Upload file to Cloudinary
-        // const coverImageLink = await uploadToCloudinary(coverImage, c.env);
-
-        const coverImageLink = "https://miro.medium.com/v2/resize:fit:640/format:webp/1*Ps07j5DLW5fXWwknfhKecQ.jpeg";
+        const coverImageLink:any = await uploadToCloudinary(coverImage, c.env);
 
         const blog = await prisma.post.create({
             data: {
