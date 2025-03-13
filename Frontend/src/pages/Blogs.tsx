@@ -111,7 +111,7 @@ export const Blogs:React.FC = ()=>{
     // }
     
   return(
-    <div>
+    <div className="w-full mx-auto px-2">
         <AppBar/>
 
         <div className="w-full mx-auto text-center text-sm ">

@@ -74,7 +74,8 @@ type TextEditorProps = {
 function TextEditor({sendRequest, loading} : TextEditorProps){
     const [formData, setFormData] = useState<FormDataType>({
         title: "",
-        description: ""
+        description: "",
+        coverImage: ""
     });
 
     const [file, setFile] = useState<File | null>(null);
@@ -89,6 +90,10 @@ function TextEditor({sendRequest, loading} : TextEditorProps){
         if(selectedFile){
             setFile(selectedFile);      // store file
             setFileName(selectedFile.name);
+            setFormData((prev) => ({
+                ...prev,
+                coverImage: selectedFile.name,
+            }));
 
              // Image Preview
             const reader = new FileReader();
@@ -110,7 +115,7 @@ function TextEditor({sendRequest, loading} : TextEditorProps){
     },[formData])
 
     return (     
-        <div className="w-[80%] grid grid-cols-1 gap-4 mt-8 bg-white p-5 rounded-lg">
+        <div className="w-full lg:w-[80%] grid grid-cols-1 gap-4 mt-8 bg-white p-5 rounded-lg">
             <input required type="text" placeholder="Title" 
                 onChange={(e)=>{
                     setFormData({

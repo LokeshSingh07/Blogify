@@ -20,18 +20,18 @@ function Blog(): React.ReactElement {
   }
 
   return (
-    <div className='w-full'>
+    <div className='w-full mx-auto px-2'>
       <AppBar/>
       
-      <div className='w-[95%] md:w-[85%] lg:w-[80%] xl:w-[70%] mx-auto flex flex-row items-start justify-center mt-16 mb-20 gap-10'>
-        <div className='w-[85%]'>
+      <div className='w-[95%] md:w-[85%] lg:w-[80%] xl:w-[70%] mx-auto flex flex-col lg:flex-row items-start justify-center mt-16 mb-20 gap-10'>
+        <div className='w-full lg:w-[85%]'>
           <div className='text-4xl font-bold'>{blog?.title}</div>
           {/* @ts-ignore */}
           <div className='text-sm text-gray-600 mt-4 select-none'>Posted on {formatDateToDayMonthYear(blog?.createdAt)}</div>
           <div className='text-lg mt-10'>{blog?.description}</div>
         </div>
 
-        <div className='w-[15%] select-none'>
+        <div className='w-full lg:w-[15%] select-none'>
           <div>Author</div>
           <div className='flex flex-row items-center gap-2 mt-5'>
             <div className=''>

@@ -9,7 +9,7 @@ import Tick from "../assets/tick.svg"
 export const MembershipPlan:React.FC = () => {
 
   return (
-    <div className="w-screen mx-auto h-screen p-5">
+    <div className="w-screen mx-auto min-h-screen p-5">
       <div className="text-[48px] font-semibold font-[times-new-roman] ">Membership Plan</div>
 
 
