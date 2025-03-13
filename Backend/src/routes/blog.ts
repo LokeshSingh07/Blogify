@@ -149,7 +149,14 @@ blogRouter.get('/bulk', async(c) => {
     }).$extends(withAccelerate());
 
     try{
+        const page = Number(c.req.query('page')) || 1; 
+        const limit = Number(c.req.query('limit')) || 10;
+        const skip = (page - 1) * limit;
+
         const blog = await prisma.post.findMany({
+            skip,
+            take: limit,
+            orderBy: {createdAt: 'desc'},
             include: {
                 author: {
                     select: {
@@ -161,10 +168,18 @@ blogRouter.get('/bulk', async(c) => {
         });
         // console.log("blog: ", blog);
 
+        const totalBlogs = await prisma.post.count();
+
         c.status(201);
         return c.json({
             message: "All blogs fetched successfully",
-            blog
+            blog,
+            pagination: {
+                total: totalBlogs,
+                page,
+                limit,
+                totalPages: Math.ceil(totalBlogs / limit)
+            }
         })
     }
     catch(err){
