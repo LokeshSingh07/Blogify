@@ -36,9 +36,10 @@ export const BlogCard:React.FC<BlogProps> = ({blog}) => {
                 </div>
 
                 <div className={`w-full flex flex-col my-2`}>
-                    <div className='text-xl font-bold'>{blog?.title}</div>
-                    <div className='text-gray-700 '>
-                        {blog?.description.length > 175 ? `${blog?.description?.slice(0, 175)} ...` : blog?.description}
+                    <div className='text-xl font-bold line-clamp-1'>{blog?.title}</div>
+                    <div className='text-gray-700 line-clamp-2'>
+                        {/* {blog?.description.length > 175 ? `${blog?.description?.slice(0, 175)} ...` : blog?.description} */}
+                        {blog?.description}
                     </div>
                 </div>
             </div>
@@ -56,13 +57,13 @@ export const BlogCard:React.FC<BlogProps> = ({blog}) => {
                     {
                         showOptions && (
                             <div className="absolute left-[110px] mt-[100px] w-36 bg-white border rounded-md shadow-md">
-                                <button className="w-full text-left px-3 py-1 hover:bg-gray-100" onClick={() => console.log("follow clicked")}>
+                                <button className="w-full text-left px-3 py-1 hover:bg-gray-100 cursor-not-allowed" onClick={() => console.log("follow clicked")}>
                                     Follow author
                                 </button>
                                 <button className="w-full text-left px-3 py-1 text-green-500 hover:bg-gray-100" onClick={() => share()}>
                                     share
                                 </button>
-                                <button className="w-full text-left px-3 py-1 text-red-500 hover:bg-gray-100" onClick={() => console.log("Delete clicked")}>
+                                <button className="w-full text-left px-3 py-1 text-red-500 hover:bg-gray-100 cursor-not-allowed" onClick={() => console.log("Delete clicked")}>
                                     Report
                                 </button>
                             </div>
@@ -74,7 +75,7 @@ export const BlogCard:React.FC<BlogProps> = ({blog}) => {
 
         {/* Image */}
         <div className='w-[20%] cursor-pointer select-none flex flex-end' onClick={()=> navigate(`/blog/${blog.id}`)}>
-            <img src={blog?.coverImage} alt="blog" className='w-full h-[60%] lg:w-[70%] lg:h-[70%] mx-auto object-cover rounded-md bg-slate-200'/>
+            <img src={blog?.coverImage} alt="blog" className='w-full h-[60%] lg:w-[70%] lg:h-[70%] mx-auto object-cover rounded-md bg-slate-200' loading='lazy'/>
         </div>
 
     </div>
