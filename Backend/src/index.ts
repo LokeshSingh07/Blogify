@@ -32,7 +32,7 @@ app.get('/', (c) => {
 app.use(
   '/api/v1/*',
   cors({
-    origin: ['http://localhost:5173','http://localhost:3000', "https://blogify-nextian.vercel.app"],
+    origin: ['http://localhost:3000', "https://blogify-nxt.vercel.app"],
   })
 )
 
