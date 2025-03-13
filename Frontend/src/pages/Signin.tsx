@@ -10,7 +10,7 @@ export const Signin: React.FC = ()=>{
         <Auth type="signin"/>
       </div>
       
-      <div className="invisible lg:visible h-full flex justify-center items-center ">
+      <div className="hidden h-full lg:flex justify-center items-center">
         <Quote/>
       </div>
 

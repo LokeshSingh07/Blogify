@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import { CiBellOn } from "react-icons/ci";
 import { IoIosMore } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
-import Logo from "../assets/logo1.png"
+import Logo from "../assets/logo.png"
 
 
 export const AppBar: React.FC = ()=>{
@@ -22,11 +22,11 @@ export const AppBar: React.FC = ()=>{
 
 
   return (
-    <div className="w-full flex flex-row justify-between px-5 select-none">
+    <div className="w-full flex flex-row justify-between items-center px-5 py-1 select-none">
 
-        <div className="flex flex-row gap-2">
+        <div className="">
             <Link to={"/blogs"}>
-                <img src={Logo || 'https://miro.medium.com/v2/resize:fit:720/format:webp/1*psYl0y9DUzZWtHzFJLIvTw.png'} alt="Logo" className="w-20"/>
+                <img src={Logo} alt="Logo" className="w-24"/>
             </Link>
         </div>
 
