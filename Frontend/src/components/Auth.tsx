@@ -54,7 +54,7 @@ function Auth({type}: ParamsType):React.ReactElement {
   },[token])
 
   return (
-    <div className="sm:w-[50%] md:w-[40%] lg:w-[60%] flex flex-col items-center justify-center px-4 md:px-5 py-5 border rounded-xl shadow-sm bg-white m-5">
+    <div className="sm:w-[50%] md:w-[40%] lg:w-[70%] flex flex-col items-center justify-center px-4 md:px-5 py-5 border rounded-xl shadow-sm bg-white m-5">
         <div className="text-3xl text-center font-bold">
             {type === "signup" ? "Join Blogify" : "Welcome back"}
         </div>
