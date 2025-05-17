@@ -32,13 +32,13 @@ const FeaturedPostCard: React.FC<FeaturedPostCardProps> = ({
             <p className="text-sm text-gray-500">{date} · {readTime} read</p>
           </div>
         </div>
-        <h2 className="text-2xl font-semibold mb-3 hover:text-green-600 transition-colors">
+        <h2 className="text-2xl font-semibold mb-3">
           <a href="#">{title}</a>
         </h2>
         <p className="text-gray-700 mb-4 line-clamp-2">{description}</p>
         <div className="flex items-center justify-between">
           <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">{topic}</span>
-          <button className="text-gray-500 hover:text-green-600">Save</button>
+          <button className="text-gray-500 bg-gray-100 rounded-md px-2 py-1">Save</button>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ const HeroSection: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-16 bg-gray-100">
+    <section className="py-16 bg-[#F5F5F0]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center">
           {/* Hero Text */}
@@ -30,8 +30,8 @@ const HeroSection: React.FC = () => {
           <div className="md:w-1/2">
             <FeaturedPostCard
               imageSrc="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-              authorName="Emma Wilson"
-              authorImage="https://randomuser.me/api/portraits/women/26.jpg"
+              authorName="Lokesh Singh"
+              authorImage="https://res.cloudinary.com/dcyjap6ft/image/upload/v1747490383/extra/L_ugkphn.jpg"
               date="May 14"
               readTime="8 min"
               title="The Future of Web Development: Trends to Watch in 2025"

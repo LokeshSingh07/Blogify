@@ -1,43 +1,39 @@
-import React, { useState } from 'react';
-import { IoIosMore } from 'react-icons/io';
+import React from 'react';
 import { BlogProps, formatDateToDayMonthYear } from './Common';
 import { useNavigate } from 'react-router-dom';
-import { CiBookmarkPlus, CiCircleMinus } from 'react-icons/ci';
 import toast from 'react-hot-toast';
+import { ClipboardCheck } from 'lucide-react';
 
 
 
 export const BlogCard:React.FC<BlogProps> = ({blog}) => {
     const navigate = useNavigate();
-    const [showOptions, setShowOptions] = useState(false);
 
     const share = async()=>{
         try{
             await navigator.clipboard.writeText(`${window?.location?.origin}/blog/${blog?.id}`);
-            toast.success("link copied");
-            setTimeout(()=> setShowOptions(false), 100);
+            toast.success("Blog link copied to clipboard.");
         }
-        catch(err){
-            console.error("Failed to share:", err);
+        catch (error) {
+            // console.error("Error copying blog link to clipboard:", error);
+            toast.error("Failed to copy the link. Please try again.");
         }
     }
  
   return (
-    <div className="w-full flex flex-row gap-10">
+    <div className="w-full flex flex-row gap-10 p-4 hover:shadow-lg rounded-lg">
         {/* content*/}
-        <div className="w-[80%] flex flex-col justify-between min-h-40">
+        <div className="w-3/4 md:w-2/3 flex flex-col min-h-40">
             <div className='cursor-pointer' onClick={()=> navigate(`/blog/${blog.id}`)}>
                 <div className="flex flex-row gap-2 items-center select-none">
                     {/* { JSON.stringify(blog, null, 4) } */}
-                    <img src={blog?.author?.profileImage || 'https://avatar.iran.liara.run/username?username=Anonymous'} alt="author" className='w-5 h-5 object-cover rounded-full'/>
-                    <div className='text-sm capitalize'>{blog?.author?.name || "Anonymous"}</div>
-                    <span><Circle/></span>
-                    <div className='text-sm text-gray-700'>{formatDateToDayMonthYear(blog.createdAt)}</div>
+                    <img src={blog?.author?.profileImage || 'https://avatar.iran.liara.run/username?username=Anonymous'} alt="author" className="w-8 h-8 rounded-full mr-3"/>
+                    <div className='font-medium capitalize'>{blog?.author?.name || "Anonymous"}</div>
                 </div>
 
                 <div className={`w-full flex flex-col my-2`}>
-                    <div className='text-xl font-bold line-clamp-1'>{blog?.title}</div>
-                    <div className='text-gray-700 line-clamp-2'>
+                    <div className='text-xl md:text-2xl font-bold mb-3 hover:text-blog-accent transition-colors line-clamp-1'>{blog?.title}</div>
+                    <div className='text-gray-600 mb-4 line-clamp-2 md:line-clamp-2'>
                         {/* {blog?.description.length > 175 ? `${blog?.description?.slice(0, 175)} ...` : blog?.description} */}
                         {blog?.description}
                     </div>
@@ -45,37 +41,26 @@ export const BlogCard:React.FC<BlogProps> = ({blog}) => {
             </div>
 
             <div className='flex flex-row justify-between items-center select-none'>
-                <div className='flex items-center gap-2'>
-                    <div className='bg-slate-200 px-2 rounded-full text-sm'>{blog?.topic || "demo"}</div>
-                    <div className='text-sm'>{Math.ceil(blog?.description?.length/200)} min read</div>
+                <div className="flex items-center text-sm text-gray-500">
+                    <span className='text-sm text-gray-700'>{formatDateToDayMonthYear(blog.createdAt)}</span>
+                    <span className="mx-2">·</span>
+                    <span>{Math.ceil(blog?.description?.length/200)} min read</span>
+                    <span className="mx-2">·</span>
+                    <span className='bg-gray-100 text-gray-700 py-1 px-3 rounded-full text-xs'>{blog?.topic || "Design"}</span>
                 </div>
                 <div className={`relative flex items-center justify-center gap-5`}>
-                    <button className='text-gray-500'><CiBookmarkPlus fontSize={22}/></button>
-                    <button className='text-gray-500'><CiCircleMinus fontSize={22}/></button>
-                    <button className='text-gray-500' onClick={()=> {setShowOptions(!showOptions)}} ><IoIosMore fontSize={22}/></button>
-                    {/* More options (Edit and delete) */}
-                    {
-                        showOptions && (
-                            <div className="absolute left-[110px] mt-[100px] w-36 bg-white border rounded-md shadow-md">
-                                <button className="w-full text-left px-3 py-1 hover:bg-gray-100 cursor-not-allowed" onClick={() => console.log("follow clicked")}>
-                                    Follow author
-                                </button>
-                                <button className="w-full text-left px-3 py-1 text-green-500 hover:bg-gray-100" onClick={() => share()}>
-                                    share
-                                </button>
-                                <button className="w-full text-left px-3 py-1 text-red-500 hover:bg-gray-100 cursor-not-allowed" onClick={() => console.log("Delete clicked")}>
-                                    Report
-                                </button>
-                            </div>
-                        )
-                    }
+                    <button className="w-full text-left px-3 py-1 text-gray-500 hover:bg-gray-100" 
+                        onClick={() => share()}
+                    >
+                        <ClipboardCheck className='h-5 w-5'/>
+                    </button>
                 </div>
             </div>
         </div>
 
         {/* Image */}
-        <div className='w-[20%] cursor-pointer select-none flex flex-end' onClick={()=> navigate(`/blog/${blog.id}`)}>
-            <img src={blog?.coverImage} alt="blog" className='w-full h-[60%] lg:w-[70%] lg:h-[70%] mx-auto object-cover rounded-md bg-slate-200' loading='lazy'/>
+        <div className='w-1/4 md:w-1/3 cursor-pointer select-none flex flex-end' onClick={()=> navigate(`/blog/${blog.id}`)}>
+            <img src={blog?.coverImage} alt="blog" className='w-full h-full max-h-[35vh] object-cover rounded-lg' loading='lazy'/>
         </div>
 
     </div>

@@ -120,7 +120,7 @@ export const Blogs:React.FC = ()=>{
             <Link to={'/membership'} className="font-semibold hover:underline"> Become a member</Link>
         </div>
 
-        <div className="w-[95%] md:w-[85%] lg:w-[80%] xl:w-[70%] mx-auto flex flex-col items-center justify-center mt-5 text-black">
+        <div className="max-w-6xl mx-auto flex flex-col items-center justify-center mt-5 text-black">
             <div className="w-full flex flex-row gap-5 justify-start items-center">
                 <button className="text-black px-3 py-2 rounded-md" onClick={()=> {}}><FiPlus fontSize={20}/></button>
                 <div className="flex flex-row gap-5">

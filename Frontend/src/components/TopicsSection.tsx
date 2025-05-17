@@ -14,7 +14,7 @@ const topics = [
 
 const TopicsSection: React.FC = () => {
   return (
-    <section className="py-8 bg-[#F5F5F0]">
+    <section className="py-8 px-4 bg-[#F5F5F0]">
       <div className="max-w-6xl mx-auto">
         <h2 className="font-semibold text-2xl mb-6">Discover topics that matter to you</h2>
         
