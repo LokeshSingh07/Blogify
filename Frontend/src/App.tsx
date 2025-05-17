@@ -17,7 +17,7 @@ function App() {
   
 
   return (
-    <div className='max-w-5xl mx-auto'>
+    <div className='mx-auto'>
       <BrowserRouter>
         
         <Routes>

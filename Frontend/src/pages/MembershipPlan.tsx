@@ -9,28 +9,29 @@ import Tick from "../assets/tick.svg"
 export const MembershipPlan:React.FC = () => {
 
   return (
-    <div className="w-screen mx-auto min-h-screen p-5">
-      <div className="text-[48px] font-semibold font-[times-new-roman] ">Membership Plan</div>
+    <div className="w-full mx-auto min-h-screen p-5 pb-10 bg-gray-50">
+      <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10">
+        Membership Plan
+      </h1>
 
-
-      <div className="w-full mx-auto sm:w-[90%] lg:w-[70%] xl:w-[60%] flex flex-col md:flex-row gap-10 mt-10">
+      <div className="w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-10 justify-center px-4">
         {
           plans?.map((plan,idx)=>(
-            <div key={idx} className="w-full lg:w-[60%] flex flex-col bg-white py-5 px-6 lg:px-8 border rounded-md shadow-md">
+            <div key={idx} className="flex flex-col w-full md:w-[45%] bg-white rounded-xl shadow-lg p-6 border border-gray-200">
               {/* plans info */}
-              <div className="flex justify-center mb-5">
+              <div className="flex justify-center mb-6">
                 {
                   plan?.id === "1" ? 
-                  <img src={Basic} alt="basic" className="w-8"/> :
-                  <img src={Premium} alt="premium" className="w-8"/>
+                  <img src={Basic} alt="basic" className="w-10"/> :
+                  <img src={Premium} alt="premium" className="w-10"/>
                 }
               </div>
 
-              <div className="flex flex-col items-center justify-center">
-                <div className="text-2xl font-semibold">{plan?.title}</div>
-                <div className="">{plan?.priceMonthly} or {plan?.priceYearly}</div>
+              <div className="flex flex-col items-center justify-center text-center">
+                <div className="text-3xl font-semibold mb-1">{plan?.title}</div>
+                <div className="text-gray-600 text-lg mb-4">{plan?.priceMonthly} <span className="mx-1">or</span>{" "}{plan?.priceYearly}</div>
                 
-                <button className="w-full bg-green-700 px-4 py-2 text-white rounded-full text-sm font-medium mt-5 hover:bg-green-600 transition-all">
+                <button className="w-full bg-green-700 py-3 rounded-full text-white text-sm font-semibold hover:bg-green-600 transition-colors">
                   Get Started
                 </button>
               </div>
@@ -40,25 +41,25 @@ export const MembershipPlan:React.FC = () => {
               <div className="mt-8">
                 {
                   plan?.id === "2" && (
-                    <div className="flex flex-col justify-center items-center gap-5 mb-5">
-                      <div className="flex flex-row gap-2 items-center justify-center">  
+                    <div className="flex flex-col justify-center items-center gap-5 mb-6">
+                      <div className="flex items-center gap-2 text-gray-700 text-sm font-medium">
                         <img src={Basic} alt="basic" className="w-4"/>
                         <span className="text-sm">{plan?.preFeatures}</span>
                       </div>
-
-                      <div>PLUS</div>
+                      
+                      <span className="bg-green-100 text-green-700 font-semibold px-4 py-1 rounded-full tracking-wide">PLUS</span>
                     </div>
                   )
                 }
 
                 {
                   plan?.features.map((feature,idx)=>(
-                    <div key={idx} className="flex gap-2 items-center mb-2">
-                      <img src={Tick} alt="tick" className="w-4 text-green-500"/>
+                    <div key={idx} className="flex gap-3 items-center mb-2">
+                      <img src={Tick} alt="tick" className="w-5 text-green-500"/>
                       {
                         (plan?.id ==="2" && idx==0) ? 
-                        <span className="text-[16px]  font-semibold">{feature}</span> :  
-                        <span className="text-[14px]">{feature}</span>
+                        <span className="text-lg font-semibold">{feature}</span> :  
+                        <span className="text-base text-gray-700">{feature}</span>
                       }
                     </div>
                   ))
