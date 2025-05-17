@@ -66,10 +66,3 @@ export const BlogCard:React.FC<BlogProps> = ({blog}) => {
     </div>
   )
 }
-
-
-
-
-function Circle(){
-    return <div className='w-1 h-1 rounded-full bg-slate-400'></div>
-}
