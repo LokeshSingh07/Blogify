@@ -59,7 +59,7 @@ export const AppBar: React.FC = ()=>{
             </div>)
         }
 
-        {(window.location.pathname == '/') && 
+        {(window.location.pathname == '/' || window.location.pathname == '/membership') && 
             (<div className="w-full">                
                 <div className="flex justify-between items-center">
                     {/* Logo */}
