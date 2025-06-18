@@ -1,9 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FeaturedPostCard from "./FeaturedPostCard";
 
 const HeroSection: React.FC = () => {
-  const navigate = useNavigate();
 
   return (
     <section className="py-16 bg-[#F5F5F0]">
@@ -18,12 +17,12 @@ const HeroSection: React.FC = () => {
             <p className="text-lg mb-8 text-gray-700 max-w-md">
               Read and share ideas from independent voices, world-class publications, and experts from around the globe. Everyone's welcome.
             </p>
-            <button
-              onClick={() => navigate("/signin")}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg rounded-full"
+            <Link
+              to="/signin"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-3 text-lg rounded-full inline-block text-center"
             >
               Start Reading
-            </button>
+            </Link>
           </div>
 
           {/* Featured Post Card */}

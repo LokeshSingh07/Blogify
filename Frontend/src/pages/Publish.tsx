@@ -37,7 +37,7 @@ export const Publish:React.FC = ()=>{
                     "Content-Type": "multipart/form-data", // Important for file uploads
                 }
             });
-            console.log("Response: ", response.status, response.data);
+            // console.log("Response: ", response.status, response.data);
             
             toast.success(response.data.message);
             navigate('/blogs')
@@ -108,11 +108,6 @@ function TextEditor({sendRequest, loading} : TextEditorProps){
     }
 
 
-
-
-    useEffect(()=>{
-        console.log(formData)
-    },[formData])
 
     return (     
         <div className="w-full lg:w-[80%] grid grid-cols-1 gap-4 mt-8 bg-white p-5 rounded-lg">

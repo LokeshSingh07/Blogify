@@ -28,7 +28,7 @@ const TopicsSection: React.FC = () => {
             </div>
           ))}
           <div 
-            className="px-4 py-2 bg-white hover:bg-green-700 hover:text-white cursor-pointer transition-colors text-sm font-semibold"
+            className="px-4 py-2 bg-white hover:bg-green-700 hover:text-white cursor-pointer transition-colors text-sm font-semibold rounded-full"
           >
             See more topics...
           </div>

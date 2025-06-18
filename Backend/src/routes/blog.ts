@@ -40,7 +40,7 @@ blogRouter.use('/*', async(c:any, next:any)=>{
     }
 
     // pass the userId to the route handler
-    console.log("userId : ", decoded);
+    // console.log("userId : ", decoded);
     c.set("userId", decoded.id);
 
     await next();
@@ -62,7 +62,7 @@ blogRouter.post('/', async(c) => {
         const description = formData.get("description") as string;
         const coverImage = formData.get("coverImage") as File | null;
 
-        console.log("coverImage : ", coverImage);
+        // console.log("coverImage : ", coverImage);
 
         // const { success } = createBlog.safeParse({title, description, coverImage});
         if(!title || !description || !coverImage){
@@ -200,7 +200,7 @@ blogRouter.get('/:id', async(c) => {
 
     try{
         const blogId = c.req.param('id');
-        console.log("id : ", blogId);
+        // console.log("id : ", blogId);
     
         // TODO: zod validation
     

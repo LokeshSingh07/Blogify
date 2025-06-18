@@ -31,11 +31,11 @@ export const useBlog = ({id}: {id:string})=>{
               Authorization: `Bearer ${token}`
             }
           });
-          console.log(response);
+        //   console.log(response);
           setBlog(response.data.blog);
         }
         catch(err: any){
-          console.log(err);
+        //   console.log(err);
           toast.error("Internal server error");
         }
         finally{
@@ -79,14 +79,14 @@ export const useBlogs = ()=>{
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log("Response: ", response.status, response.data);
+            // console.log("Response: ", response.status, response.data);
             
             setBlogs(response.data.blog);
             toast.success(response.data.message);
 
         }
         catch(err:any){
-            console.log("Error: ", err);
+            // console.log("Error: ", err);
             toast.error(err.response.data.message);
         }
         finally{

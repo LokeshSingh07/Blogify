@@ -14,11 +14,14 @@ const NewsletterSection: React.FC = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input 
+              required
               type="email" 
               placeholder="Your email address" 
               className="flex-grow px-4 py-3 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-            <button className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md transition-colors">
+            <button 
+              onClick={()=> {}}
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-md transition-colors">
               Subscribe
             </button>
           </div>

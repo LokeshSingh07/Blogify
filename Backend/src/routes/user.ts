@@ -41,7 +41,7 @@ userRouter.post('/signup', async(c) => {
                 profileImage: `https://avatar.iran.liara.run/username?username=${body.name}`
             }
         })
-        console.log("user data : ", user);
+        // console.log("user data : ", user);
     }
     catch(e){
         c.status(400)

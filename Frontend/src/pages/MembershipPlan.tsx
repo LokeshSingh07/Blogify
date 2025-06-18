@@ -3,14 +3,17 @@ import { plans } from "../data";
 import Basic from "../assets/star.svg"
 import Premium from "../assets/friend.svg"
 import Tick from "../assets/tick.svg"
+import { AppBar } from "../components/AppBar";
 
 
 
 export const MembershipPlan:React.FC = () => {
 
   return (
-    <div className="w-full mx-auto min-h-screen p-5 pb-10 bg-gray-50">
-      <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 text-center mb-10">
+    <div className="w-full mx-auto min-h-screen pb-10 bg-gray-50">
+      <AppBar/>
+
+      <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 text-center my-10">
         Membership Plan
       </h1>
 

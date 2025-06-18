@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="col-span-1">
-            <a href="/" className="text-2xl font-bold text-green-600">Blogify</a>
+            <a href="/" className="text-2xl font-bold text-green-700">Blogify</a>
             <p className="mt-4 text-gray-600">
               Discover stories, thinking, and expertise from writers on any topic.
             </p>

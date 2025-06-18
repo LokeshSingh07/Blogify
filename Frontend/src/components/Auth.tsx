@@ -29,7 +29,7 @@ function Auth({type}: ParamsType):React.ReactElement {
     try {
       const resp  = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/user/${type=="signin"? "signin" : "signup"}`, postInputs);
 
-      console.log("Response : ", resp.status, resp.data);
+      // console.log("Response : ", resp.status, resp.data);
       
       const token = resp.data.jwt;
       localStorage.setItem("token", token);
@@ -40,7 +40,7 @@ function Auth({type}: ParamsType):React.ReactElement {
       toast.success(resp.data.message);
     }
     catch (error: AxiosError | any) {
-      console.log("error: ", error.response.data);
+      // console.log("error: ", error.response.data);
       toast.error(error.response.data.message);
     }
     setLoading(false);

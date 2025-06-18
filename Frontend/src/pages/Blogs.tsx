@@ -55,7 +55,7 @@ export const Blogs:React.FC = ()=>{
                     Authorization: `Bearer ${token}`
                 }
             });
-            console.log("Response: ", response.status, response.data);
+            // console.log("Response: ", response.status, response.data);
             
 
             if (response.data.blog.length < limit) {
@@ -114,8 +114,7 @@ export const Blogs:React.FC = ()=>{
     <div className="w-full mx-auto px-2">
         <AppBar/>
 
-        <div className="w-full mx-auto text-center text-sm ">
-            {/* <PiStarFourFill className="text-yellow-500"/> */}
+        <div className="w-full mx-auto text-center text-sm pt-5">
             ✨Get unlimited access to the best of Blogify for less than $1/week.
             <Link to={'/membership'} className="font-semibold hover:underline"> Become a member</Link>
         </div>
